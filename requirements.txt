@@ -1,2 +1,7 @@
 unicorn
-
+uvicorn
+pandas
+fastapi
+jupyter
+tensorflow
+scikit-learn
