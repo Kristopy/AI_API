@@ -5,3 +5,4 @@ fastapi
 jupyter
 tensorflow
 scikit-learn
+bodyParser
