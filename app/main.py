@@ -42,7 +42,8 @@ def on_startup():
     if METADATA_EXPORT_PATH.exists():
         MODEL_METADATA = json.loads(METADATA_EXPORT_PATH.read_text())
         label_legend_inverted = MODEL_METADATA['label_legend_inverted']
- 
+        #label_legend_inverted['0'] = 'valid'
+
 def predict(query:str):
     global AI_MODEL, AI_TOKENIZER, MODEL_METADATA, label_legend_inverted
 
@@ -69,10 +70,13 @@ def predict(query:str):
 
 @app.get("/")
 async def read_index(q: Optional[str] = None):  # /?q=Something here
-    global AI_MODEL, AI_TOKENIZER, MODEL_METADATA
+    global AI_MODEL, AI_TOKENIZER, MODEL_METADATA, label_legend_inverted
+
     query = q or 'Hello world'
     preds_dict = predict(query)
-    return {'Query': query,
-            'Results': preds_dict}
+    return {'AI-Model': 'AI_MODEL',
+            'Query': query,
+            'Results': preds_dict
+            }
             
 
