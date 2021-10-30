@@ -27,6 +27,7 @@ AI_TOKENIZER = None
 MODEL_METADATA = {}
 label_legend_inverted = {}
 
+
 @app.on_event('startup')
 def on_startup():
     global AI_MODEL, AI_TOKENIZER, MODEL_METADATA, label_legend_inverted
@@ -66,7 +67,6 @@ def predict(query:str):
                       'Confidence': float(x)} for i, x in enumerate(preds)]
     
     return {'top':top_pred, 'Predictions':labeled_preds}
-
 
 @app.get("/")
 async def read_index(q: Optional[str] = None):  # /?q=Something here
