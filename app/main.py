@@ -1,15 +1,16 @@
 #https://expressexpense.com/large-receipt-image-dataset-SRD.zip
 
 import numpy as np
+import json
+import pathlib
+
 from typing import Optional
 from fastapi import FastAPI
-from pydantic import BaseModel
+
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import tokenizer_from_json
-import json
-import pathlib
-import pickle
+
 
 app = FastAPI()
 
@@ -78,5 +79,3 @@ async def read_index(q: Optional[str] = None):  # /?q=Something here
             'Query': query,
             'Results': preds_dict
             }
-            
-
