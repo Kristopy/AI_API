@@ -1,5 +1,3 @@
-#https://expressexpense.com/large-receipt-image-dataset-SRD.zip
-
 import numpy as np
 import json
 import pathlib
