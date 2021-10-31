@@ -6,3 +6,4 @@ jupyter
 tensorflow
 scikit-learn
 bodyParser
+matplotlib
