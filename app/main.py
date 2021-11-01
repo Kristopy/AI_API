@@ -68,7 +68,7 @@ def predict(query:str):
     return {'top':top_pred, 'Predictions':labeled_preds}
 
 @app.get("/")
-async def read_index(q: Optional[str] = None):  # /?q=Something here
+async def read_index(q: Optional[str] = None):  # /?q=Something he
     global AI_MODEL, AI_TOKENIZER, MODEL_METADATA, label_legend_inverted
 
     query = q or 'Hello world'
