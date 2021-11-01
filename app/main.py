@@ -8,24 +8,28 @@ from fastapi import FastAPI
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import tokenizer_from_json
-
+from . import AI_models
 
 app = FastAPI()
 
 BASE_DIR = pathlib.Path().resolve(__file__)
 DATASETS_DIR = BASE_DIR / 'Datasets'
-EXPORT_DIR = DATASETS_DIR / 'Exports'
+DATASETS_SMS_DIR = DATASETS_DIR / 'Datasets_SMS'
+EXPORT_DIR = DATASETS_SMS_DIR / 'Exports'
 
 #Three main targets to unpack
 MODEL_EXPORT_PATH = EXPORT_DIR / 'Spam_Model.h5'
-METADATA_EXPORT_PATH = EXPORT_DIR / 'Spam-Metadata.json' 
 TOKENIZER_EXPORT_PATH = EXPORT_DIR / 'Spam-Tokenizer.json'
+METADATA_EXPORT_PATH = EXPORT_DIR / 'Spam-Metadata.json' 
 
-AI_MODEL = None
-AI_TOKENIZER = None
-MODEL_METADATA = {}
-label_legend_inverted = {}
 
+AI_model = AI_models.AIModel(
+    model_path=MODEL_EXPORT_PATH,
+    tokenizer_path=TOKENIZER_EXPORT_PATH,
+    metadata_path=METADATA_EXPORT_PATH
+)
+
+print(AI_model.example())
 
 @app.on_event('startup')
 def on_startup():
