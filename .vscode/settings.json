@@ -15,7 +15,7 @@
             "splitTerminals": [
                 {
                     "name": "zsh",
-                    "color": "terminal.ansiGreen", //color of icon
+                    //"color": "terminal.ansiGreen", //color of icon
                     "commands": [
                         "ls -al"
                     ]
@@ -27,8 +27,8 @@
             "splitTerminals": [
                 {
                     "name": "GitHub",
-                    "icon": "GitHub", //what icon to use
-                    "color": "terminal.ansiBlue", //color of icon
+                    // "icon": "GitHub", //what icon to use
+                    // "color": "terminal.ansiBlue", //color of icon
                     "commands": [
                         "git status" // your git command(s)
                     ]
@@ -39,8 +39,8 @@
             "splitTerminals": [
                 {
                     "name": "Jupyter",
-                    "icon": "zap", //what icon to use
-                    "color": "terminal.ansiRed" //color of icon
+                    // "icon": "zap", //what icon to use
+                    // "color": "terminal.ansiRed" //color of icon
                 }
             ]
         }
