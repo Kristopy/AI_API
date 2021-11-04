@@ -8,3 +8,4 @@ scikit-learn
 bodyParser
 matplotlib
 jupyterthemes
+opencv-python

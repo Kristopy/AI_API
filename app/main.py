@@ -14,70 +14,68 @@ app = FastAPI()
 
 BASE_DIR = pathlib.Path().resolve(__file__)
 DATASETS_DIR = BASE_DIR / 'Datasets'
+
 DATASETS_SMS_DIR = DATASETS_DIR / 'Datasets_SMS'
-EXPORT_DIR = DATASETS_SMS_DIR / 'Exports'
+DATASETS_NUM_REC_DIR = DATASETS_DIR / 'Datasets_NUM_REC'
+
+EXPORT_SMS_DIR = DATASETS_SMS_DIR / 'Exports'
+EXPORT_NUM_REC_DIR = DATASETS_NUM_REC_DIR / 'Exports'
 
 #Three main targets to unpack
-MODEL_EXPORT_PATH = EXPORT_DIR / 'Spam_Model.h5'
-TOKENIZER_EXPORT_PATH = EXPORT_DIR / 'Spam-Tokenizer.json'
-METADATA_EXPORT_PATH = EXPORT_DIR / 'Spam-Metadata.json' 
+MODE_SMS_EXPORT_PATH = EXPORT_SMS_DIR / 'Spam_Model.h5'
+TOKENIZER_EXPORT_PATH = EXPORT_SMS_DIR / 'Spam-Tokenizer.json'
+METADATA_EXPORT_PATH = EXPORT_SMS_DIR / 'Spam-Metadata.json'
 
+MODEL_NUM_REC_EXPORT_PATH = EXPORT_NUM_REC_DIR / 'Num_Rec_Model.h5'
+METADATA_NUM_REC_EXPORT_PATH = EXPORT_NUM_REC_DIR / 'Num_rec_Metadata.json'
 
-AI_model = AI_models.AIModel(
-    model_path=MODEL_EXPORT_PATH,
-    tokenizer_path=TOKENIZER_EXPORT_PATH,
-    metadata_path=METADATA_EXPORT_PATH
-)
+# @app.on_event('startup')
+# def on_startup():
+#     global AI_MODEL, AI_TOKENIZER, MODEL_METADATA, label_legend_inverted
 
-print(AI_model.example())
-
-@app.on_event('startup')
-def on_startup():
-    global AI_MODEL, AI_TOKENIZER, MODEL_METADATA, label_legend_inverted
-
-    #Load Models: 
-    if MODEL_EXPORT_PATH.exists():
-        AI_MODEL = load_model(MODEL_EXPORT_PATH)
+#     #Load Models: 
+#     if MODEL_EXPORT_PATH.exists():
+#         AI_MODEL = load_model(MODEL_EXPORT_PATH)
    
-    if TOKENIZER_EXPORT_PATH.exists():
-        t_json = TOKENIZER_EXPORT_PATH.read_text()
-        AI_TOKENIZER = tokenizer_from_json(t_json)
+#     if TOKENIZER_EXPORT_PATH.exists():
+#         t_json = TOKENIZER_EXPORT_PATH.read_text()
+#         AI_TOKENIZER = tokenizer_from_json(t_json)
 
-    if METADATA_EXPORT_PATH.exists():
-        MODEL_METADATA = json.loads(METADATA_EXPORT_PATH.read_text())
-        label_legend_inverted = MODEL_METADATA['label_legend_inverted']
-        #label_legend_inverted['0'] = 'valid'
+#     if METADATA_EXPORT_PATH.exists():
+#         MODEL_METADATA = json.loads(METADATA_EXPORT_PATH.read_text())
+#         label_legend_inverted = MODEL_METADATA['label_legend_inverted']
+#         #label_legend_inverted['0'] = 'valid'
 
-def predict(query:str):
-    global AI_MODEL, AI_TOKENIZER, MODEL_METADATA, label_legend_inverted
-
-    # Converting input text to sequences from tokenizer
-    sequences = AI_TOKENIZER.texts_to_sequences([query])
-    maxlen = MODEL_METADATA.get('max_seq_len') or 280
-    # Padding the x-input for formatting
-    x_input = pad_sequences(sequences, maxlen=maxlen)
-    # passing in x-input in correct format and sequence to model.predict()
-    y_output = AI_MODEL.predict(x_input)
-    #top_y_input = np.argmax(y_output) #Collecting index of largest value example: ([0.9837, 0.0167]), yields index 0
-    preds = y_output[0]
-
-    top_idx_val = np.argmax(preds)
-
-    top_pred = {'labels': label_legend_inverted[str(top_idx_val)],
-                'Confidence': float(preds[top_idx_val])}
-
-    labeled_preds = [{'labels': label_legend_inverted[str(i)], 
-                      'Confidence': float(x)} for i, x in enumerate(preds)]
-    
-    return {'top':top_pred, 'Predictions':labeled_preds}
-
-@app.get("/")
+@app.get("/SMS")
 async def read_index(q: Optional[str] = None):  # /?q=Something he
-    global AI_MODEL, AI_TOKENIZER, MODEL_METADATA, label_legend_inverted
+    global AI_MODEL
+
+    AI_MODEL = AI_models.AIModel(
+        model_path=MODE_SMS_EXPORT_PATH,
+        tokenizer_path=TOKENIZER_EXPORT_PATH,
+        metadata_path=METADATA_EXPORT_PATH
+    )
 
     query = q or 'Hello world'
-    preds_dict = predict(query)
-    return {'AI-Model': 'AI_MODEL',
+    preds_dict = AI_MODEL.Results_preds(query)
+
+    return {'AI-Model': 'SMS - SPAM and HAM estimation',
             'Query': query,
             'Results': preds_dict
+            }
+
+
+@app.get("/NUM_REC")
+async def read_index(q: Optional[int] = None):  # /?q=Something he
+    global AI_MODEL
+
+    AI_MODEL = AI_models.AIModel(
+        model_path=MODEL_NUM_REC_EXPORT_PATH,
+        metadata_path=METADATA_NUM_REC_EXPORT_PATH
+    )
+    
+    query = q or 1
+    return {'AI-Model': 'Number recognition from images',
+            'Query': query,
+            'Results': AI_MODEL.AI_NUM_REC(query)
             }
