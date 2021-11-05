@@ -45,6 +45,7 @@ METADATA_NUM_REC_EXPORT_PATH = EXPORT_NUM_REC_DIR / 'Num_rec_Metadata.json'
 #         MODEL_METADATA = json.loads(METADATA_EXPORT_PATH.read_text())
 #         label_legend_inverted = MODEL_METADATA['label_legend_inverted']
 #         #label_legend_inverted['0'] = 'valid'
+#HELlo 
 
 @app.get("/SMS")
 async def read_index(q: Optional[str] = None):  # /?q=Something he
