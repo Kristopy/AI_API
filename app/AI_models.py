@@ -9,6 +9,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import tokenizer_from_json
 
+from . import Images_address
 
 @dataclass
 class AIModel:
@@ -17,11 +18,12 @@ class AIModel:
     model_path: Path
     tokenizer_path: Optional[Path] = None
     metadata_path: Optional[Path] = None
+    image_path: Optional[Path] = None
 
     model = None
     tokenizer = None
     metadata = None
-
+    image = None
     # * __post_inti__ for checking if model and other important files are being implemented
     def __post_init__(self):
         if self.model_path.exists():
@@ -35,6 +37,11 @@ class AIModel:
             if self.metadata_path.exists():
                 if self.metadata_path.name.endswith("json"):
                     self.metadata = json.loads(self.metadata_path.read_text())
+        if self.image_path:
+            if self.image_path.exists():
+                #Convert image if image exist - take in path
+                self.image = Images_address.Image_Convert(self.image_path)
+
 
     # * get function for fetching models and other important elements
     def get_model(self):
@@ -51,6 +58,12 @@ class AIModel:
         if not self.metadata:
             raise Exception("metadata not implemeted")
         return self.metadata
+    
+    def get_image(self):
+        if not self.image:
+            raise Exception("Image not found for converting")
+        return self.image
+
 
     # * This section is based upon SMS-model. 
     # * START
@@ -88,22 +101,36 @@ class AIModel:
 
     # * This section is based upon AI_NUM_REC MODEL.
     # * START
-    def AI_NUM_REC(self, query: int):
+    # def Convert_img_to_vec(self, query: str):
+    #     try: 
+    #         vec_image = Image_Convert()
+    #         return vec_image
+    #     except:
+    #         return Exception('File not read!')
+        
+        
+
+    def AI_NUM_REC(self, path_to_img: str):
         model = self.get_model()
         metadata = self.get_metadata()
+        image = self.get_image() #Should be a matrice list 
+
         val_acc = metadata['val_acc']
         val_loss = metadata['val_loss']
-        X_test = metadata['X_test'] #* When dumped to json we converted the matrix by applying .to_list()
+        # X_test = metadata['X_test'] #* When dumped to json we converted the matrix by applying .to_list()
+       
         #! X_test consist of multiple matrices of numbers between 0-9
-        predictions = model.predict([X_test])
-        
-        if query > 9:
-            return {'Model Criteria': 'Model is based upon images from 0-9, inputs above this is value not valid'}
+        # THis vec_image should contain only one image array not multiple.
+        predictions = model.predict([image])
+        #! Should return what we want to see in API - input query should be something clever - working on in
+        #TODO Query should be something reasenable possibly the path to image. 
+        if not path_to_img.exists():
+            return {'Model Criteria': 'Model is based upon images from 0-9, inputs above this is value not valid',
+                    'Exception Error': 'Path not found for image - pass in your local path'}
         else:
             return {'Validity accuracy': val_acc,
                     'Validity loss': val_loss,
-                    'Predictions': np.argmax(predictions[query]),
-                    'Correct Output': query}
+                    'Predictions': np.argmax(predictions),
+                    'Correct Output': str(path_to_img)}
      # * END
-
 

@@ -26,6 +26,17 @@
         {
             "splitTerminals": [
                 {
+                    "name": "UvicornAPI",
+                    //"color": "terminal.ansiGreen", //color of icon
+                    "commands": [
+                        "uvicorn app.main:app --reload"
+                    ]
+                },
+            ]
+        },
+        {
+            "splitTerminals": [
+                {
                     "name": "GitHub",
                     // "icon": "GitHub", //what icon to use
                     // "color": "terminal.ansiBlue", //color of icon
