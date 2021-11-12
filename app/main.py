@@ -62,9 +62,6 @@ async def read_index(q: Optional[str] = None):  # /?q=Something he
 
     query = q or 'Hello world'
     preds_dict = AI_MODEL.Results_preds(query)
-    print('--'*50, '\n')
-    print(type(preds_dict), '\n')
-    print('--'*50)
     return {'AI-Model': 'SMS - SPAM and HAM estimation',
             'Query': query,
             'Results': preds_dict
@@ -75,13 +72,18 @@ async def read_index(q: Optional[str] = None):  # /?q=Something he
 async def read_index(q: Optional[str] = None):  # /?q=Something he
     global AI_MODEL
 
+    #Seems like the or method did not work with pathlib.Path module implemented
+    if q == None:
+        query = IMAGE_PATH
+    else:
+        query = pathlib.Path(q)
+
     AI_MODEL = AI_models.AIModel(
         model_path=MODEL_NUM_REC_EXPORT_PATH,
         metadata_path=METADATA_NUM_REC_EXPORT_PATH,
-        image_path= q or IMAGE_PATH
+        image_path=query
     )
     
-    query = q or IMAGE_PATH
     results = AI_MODEL.AI_NUM_REC(query)
 
     print('--'*50, '\n')

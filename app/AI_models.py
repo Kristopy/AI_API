@@ -19,11 +19,12 @@ class AIModel:
     tokenizer_path: Optional[Path] = None
     metadata_path: Optional[Path] = None
     image_path: Optional[Path] = None
-
+   
     model = None
     tokenizer = None
     metadata = None
     image = None
+
     # * __post_inti__ for checking if model and other important files are being implemented
     def __post_init__(self):
         if self.model_path.exists():
@@ -41,7 +42,6 @@ class AIModel:
             if self.image_path.exists():
                 #Convert image if image exist - take in path
                 self.image = Images_address.Image_Convert(self.image_path)
-
 
     # * get function for fetching models and other important elements
     def get_model(self):
@@ -115,22 +115,29 @@ class AIModel:
         metadata = self.get_metadata()
         image = self.get_image() #Should be a matrice list 
 
-        val_acc = metadata['val_acc']
-        val_loss = metadata['val_loss']
+        val_acc = float(metadata['val_acc'])
+        val_loss = float(metadata['val_loss'])
         # X_test = metadata['X_test'] #* When dumped to json we converted the matrix by applying .to_list()
        
         #! X_test consist of multiple matrices of numbers between 0-9
         # THis vec_image should contain only one image array not multiple.
         predictions = model.predict([image])
+        preds_arg = np.argmax(predictions)
+        preds_list = predictions.tolist()
+
         #! Should return what we want to see in API - input query should be something clever - working on in
         #TODO Query should be something reasenable possibly the path to image. 
         if not path_to_img.exists():
             return {'Model Criteria': 'Model is based upon images from 0-9, inputs above this is value not valid',
                     'Exception Error': 'Path not found for image - pass in your local path'}
         else:
+            #Perhaps it is not a great ide to round the answers here. For later use perhaps the user want full details around output.
             return {'Validity accuracy': val_acc,
                     'Validity loss': val_loss,
-                    'Predictions': np.argmax(predictions),
-                    'Correct Output': str(path_to_img)}
+                    'Overview Predictions': [{'Value': i,
+                                              'Probability': float(round(x*100, 1))} for i, x in enumerate(preds_list[0])],
+                    'Top probability': {'Value': int(preds_arg), 
+                                        'Probability': round(preds_list[0][preds_arg]*100, 1)}
+                    }
      # * END
 

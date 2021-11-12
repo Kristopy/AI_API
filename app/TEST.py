@@ -3,9 +3,7 @@
 if __name__ == '__main__':
     import pathlib
     from AI_models import AIModel
-    import random
     import numpy as np
-    from Images_address import Image_Convert
 
     BASE_DIR = pathlib.Path().resolve(__file__)
     DATASETS_DIR = BASE_DIR / 'Datasets'
@@ -18,24 +16,25 @@ if __name__ == '__main__':
 
     AI_MODEL = AIModel(
         model_path=MODEL_NUM_REC_EXPORT_PATH,
-        metadata_path=METADATA_NUM_REC_EXPORT_PATH
+        metadata_path=METADATA_NUM_REC_EXPORT_PATH,
+        image_path=IMAGE_PATH
     )
 
     metadata = AI_MODEL.get_metadata()
     model = AI_MODEL.get_model()
-
+    image= AI_MODEL.get_image()
 
    
     X_test = metadata['X_test']
     y_test = metadata['y_test']
-    Imp_img = Image_Convert()
 
     #random_idx = random.randint(0, len(X_test))
-    predictions = model.predict([Imp_img])
+    predictions = model.predict([image])
 
     print('Predicted results: ', np.argmax(predictions), '\n' )
-
-
+    test = [{'Prediction': int(predictions[i]),
+      'Probability': int(x)} for i, x in enumerate(predictions)]
+    print(test)
     # metadata = pd.DataFrame(metadata['X_test'][0])
     # new = metadata.round(1)
     # max = metadata.max(axis=0)
