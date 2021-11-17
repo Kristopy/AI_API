@@ -9,3 +9,4 @@ bodyParser
 matplotlib
 jupyterthemes
 opencv-python
+docker
