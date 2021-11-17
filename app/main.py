@@ -6,7 +6,7 @@ from . import AI_models
 
 app = FastAPI()
 
-#TEST1
+#TEST1 after cleanup
 
 BASE_DIR = pathlib.Path().resolve(__file__)
 DATASETS_DIR = BASE_DIR / 'Datasets'
