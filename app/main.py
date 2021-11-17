@@ -12,6 +12,8 @@ from . import AI_models
 
 app = FastAPI()
 
+#TEST
+
 BASE_DIR = pathlib.Path().resolve(__file__)
 DATASETS_DIR = BASE_DIR / 'Datasets'
 
