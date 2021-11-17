@@ -4,6 +4,7 @@
 
 def Image_Convert(IMAGES_PATH):
     import cv2
+    from fastapi import HTTPException
     try:
         image = cv2.imread(str(IMAGES_PATH), cv2.IMREAD_COLOR)
         image_RGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -15,9 +16,7 @@ def Image_Convert(IMAGES_PATH):
         formatted_img = imagem/255
         return formatted_img.tolist()
     except:
-        print('--'*20)
-        print('Exception Error - Path Not Found', IMAGES_PATH)
-        print('--'*20)
+        raise HTTPException(status_code=404, detail=f'Path not found or filename incorrect {str(IMAGES_PATH)}')
 
 if __name__ == '__main__':
     Image_Convert()
