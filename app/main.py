@@ -1,13 +1,7 @@
-import numpy as np
-import json
 import pathlib
 
 from typing import Optional
 from fastapi import FastAPI
-
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.preprocessing.text import tokenizer_from_json
 from . import AI_models
 
 app = FastAPI()
@@ -32,25 +26,7 @@ MODEL_NUM_REC_EXPORT_PATH = EXPORT_NUM_REC_DIR / 'Num_Rec_Model.h5'
 METADATA_NUM_REC_EXPORT_PATH = EXPORT_NUM_REC_DIR / 'Num_rec_Metadata.json'
 
 IMAGE_DIR = DATASETS_NUM_REC_DIR / 'Images_convert'
-IMAGE_PATH = IMAGE_DIR / 'Number_2.png'
-
-# @app.on_event('startup')
-# def on_startup():
-#     global AI_MODEL, AI_TOKENIZER, MODEL_METADATA, label_legend_inverted
-
-#     #Load Models: 
-#     if MODEL_EXPORT_PATH.exists():
-#         AI_MODEL = load_model(MODEL_EXPORT_PATH)
-   
-#     if TOKENIZER_EXPORT_PATH.exists():
-#         t_json = TOKENIZER_EXPORT_PATH.read_text()
-#         AI_TOKENIZER = tokenizer_from_json(t_json)
-
-#     if METADATA_EXPORT_PATH.exists():
-#         MODEL_METADATA = json.loads(METADATA_EXPORT_PATH.read_text())
-#         label_legend_inverted = MODEL_METADATA['label_legend_inverted']
-#         #label_legend_inverted['0'] = 'valid'
-#HELlo 
+IMAGE_PATH = IMAGE_DIR / 'Number_0.png'
 
 @app.get("/SMS")
 async def read_index(q: Optional[str] = None):  # /?q=Something he
@@ -71,12 +47,12 @@ async def read_index(q: Optional[str] = None):  # /?q=Something he
 
 
 @app.get("/NUM_REC")
-async def read_index(q: Optional[str] = None):  # /?q=Something he
+async def read_index(q: Optional[str] = None):  # /?q=path to filename
     global AI_MODEL
 
     #Seems like the or method did not work with pathlib.Path module implemented
     if q == None:
-        query = IMAGE_PATH
+        query = IMAGE_PATH #default path if q == None
     else:
         query = pathlib.Path(q)
 
@@ -88,12 +64,6 @@ async def read_index(q: Optional[str] = None):  # /?q=Something he
     
     results = AI_MODEL.AI_NUM_REC(query)
 
-    print('--'*50, '\n')
-    print({'AI-Model': 'Number recognition from images',
-           'Query': query,
-           'Results': results
-           }, '\n')
-    print(print('--'*50))
 
     return {'AI-Model': 'Number recognition from images',
             'Query': query,

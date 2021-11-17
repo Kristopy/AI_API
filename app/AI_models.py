@@ -10,6 +10,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import tokenizer_from_json
 
 from . import Images_address
+from fastapi import HTTPException
 
 @dataclass
 class AIModel:
@@ -42,7 +43,10 @@ class AIModel:
             if self.image_path.exists():
                 #Convert image if image exist - take in path
                 self.image = Images_address.Image_Convert(self.image_path)
-
+            else:
+                raise HTTPException(
+                    status_code=404, detail=f'Path address not found for {str(self.image_path)}')
+   
     # * get function for fetching models and other important elements
     def get_model(self):
         if not self.model:
@@ -61,7 +65,7 @@ class AIModel:
     
     def get_image(self):
         if not self.image:
-            raise Exception("Image not found for converting")
+             raise HTTPException(status_code=404, detail=f'Incorrect filename: returning {str(self.image_path)}')
         return self.image
 
 
