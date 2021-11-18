@@ -114,46 +114,65 @@
 └── requirements.txt
 ```
 
->Note: Create a virtuel envirement before installing dependencies - cd to working parent directory AI-API. 
 
-For creating a virtuel envirement run:  
-```
-$ pipenv shell
-```
+### Installation
 
+1. Clone the repo
+   ```sh
+   git clone https://github.com/kristopy/AI-API
+   ```
 
-The first thing to do is to install the required requirements, containing all the neccesary packages in this project. 
+2. >Note: Create a virtuel envirement before installing dependencies - cd to working parent directory AI-API. 
 
-```zsh
-$ pip3 install -r requirements.txt
-```
+3. For creating a virtuel envirement run:  
+    ```
+    $ pipenv shell
+    ```
 
->Second agenda is to run main.py using uvicorn.
+4. The first thing to do is to install the required requirements, containing all the neccesary packages in this project. 
+    ```zsh
+    $ pip3 install -r requirements.txt
+    ```
+5. >Run main.py using uvicorn.
+    
+    From command line run the following command:
 
-From command line run the following command: 
+    ```
+    $ uvicorn app.main:app --reload
+    ```
 
-```
-$ uvicorn app.main:app --reload
-```
-The ```--reload``` parameter reloads the app when changes to the filestructure is maid. 
+    The ```--reload``` parameter reloads the app when changes to the filestructure is maid. 
 
-Remember that inside main.py we declear the app using. 
+    Remember that inside main.py we declear the app using: 
 
-```py
-app = FastAPI()
-```
+    ```py
+    app = FastAPI()
+    ```
 
-The expected output should be: 
+    The expected output should be: 
 
-```py
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [5940] using statreload
-INFO:     Started server process [5942]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-```
+    ```py
+    INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+    INFO:     Started reloader process [5940] using statreload
+    INFO:     Started server process [5942]
+    INFO:     Waiting for application startup.
+    INFO:     Application startup complete.
+    ```
+
 
 >The fastAPI is now ready for usage. 
+
+
+## Project information
+
+> This project is two-fold - Two machine learnign algorithms based upon **Ham/Spam detection** and **Number recognition**
+
+In the folders **`NUM_REC`** and **`SMS-SPAM`** jupyter notebook is utilized for machine learning and file-management. 
+
+> These scripts will create folders where the Datasets are stored - as seen in working tree. 
+
+
+
 
 
 
