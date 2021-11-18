@@ -172,6 +172,47 @@ In the folders **`NUM_REC`** and **`SMS-SPAM`** jupyter notebook is utilized for
 
 > These scripts will create folders where the Datasets are stored - as seen in working tree. 
 
+**Important to note:** Under `Datasets`/.../`Exports` we save our models and various json file for later use. 
+
+These files are all handled in `AI_models.py`, and are open for modifying if neccesary. 
+
+
+Generally declearing ` __init__` variables in AIModel class:
+
+```py
+class AIModel:
+    model_path: Path
+    tokenizer_path: Optional[Path] = None
+    metadata_path: Optional[Path] = None
+    image_path: Optional[Path] = None
+```
+
+> Keep in min that tokenizer_path, metadata_path, image_path are all optional and passed as None if not decleared. 
+
+These are all decleared in main.py after importing 
+
+```py
+AI_MODEL = AI_models.AIModel(
+    model_path=MODEL_SMS_EXPORT_PATH,
+    tokenizer_path=TOKENIZER_EXPORT_PATH, #Optional
+    metadata_path=METADATA_EXPORT_PATH, #Optional
+    image_path=query #Optional : Query is path to image passed in by /?q='path to filename' in url
+)
+```
+
+The main.py includes GET request by: 
+```py
+@app.get("/SMS")
+async def read_index(q: Optional[str] = None):  # /?q=String containing input 
+    global AI_MODEL
+
+@app.get("/NUM_REC")
+async def read_index(q: Optional[str] = None):  # /?q=path to filename
+    global AI_MODEL
+
+```
+
+> These GET request return json formatted output containg results from query passed in through `/?q=path to filename or string containing input `. 
 
 
 
