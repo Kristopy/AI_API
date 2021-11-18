@@ -53,7 +53,88 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+**This section contains informations about the project and how to take it to use.**
 
+> First agenda is wath the project contains. 
+
+
+```
+├── Datasets
+│   ├── Datasets_NUM_REC
+│   │   ├── Exports
+│   │   │   ├── Num_Rec_Metadata.json
+│   │   │   └── Num_Rec_Model.h5
+│   │   ├── Images_convert
+│   │   │   ├── Number_0.png
+│   │   │   ├── Number_2.png
+│   │   │   ├── Number_3.png
+│   │   │   ├── Number_3_2.png
+│   │   │   ├── Number_5.png
+│   │   │   ├── Number_7.png
+│   │   │   ├── Number_8.png
+│   │   │   ├── Number_8_2.png
+│   │   │   └── Number_9.png
+│   │   ├── NUM_REC_Classifier
+│   │   │   ├── Test_datasets
+│   │   │   │   ├── num-rec-test-image-dataset
+│   │   │   │   └── num-rec-test-labels-dataset
+│   │   │   └── Train_datasets
+│   │   │       ├── num-rec-train-image-dataset
+│   │   │       └── num-rec-train-labels-dataset
+│   │   └── Zips
+│   │       ├── num-rec-test-image-dataset
+│   │       ├── num-rec-test-labels-dataset
+│   │       ├── num-rec-train-image-dataset
+│   │       └── num-rec-train-labels-dataset
+│   └── Datasets_SMS
+│       ├── Exports
+│       │   ├── Spam-Metadata.json
+│       │   ├── Spam-Metadata.pkl
+│       │   ├── Spam-Tokenizer.json
+│       │   ├── Spam_Dataset.csv
+│       │   └── Spam_Model.h5
+│       ├── Spam-Classifier
+│       │   ├── Sms-Spam
+│       │   │   ├── SMSSpamCollection
+│       │   │   └── readme
+│       │   └── Youtube-Spam
+│       │       ├── Youtube01-Psy.csv
+│       │       ├── Youtube02-KatyPerry.csv
+│       │       ├── Youtube03-LMFAO.csv
+│       │       ├── Youtube04-Eminem.csv
+│       │       ├── Youtube05-Shakira.csv
+│       │       └── __MACOSX
+│       └── Zips
+│           ├── sms-spam-dataset.zip
+│           └── youtube-spam-dataset.zip
+├── NUM_REC
+│   ├── 1.\ Download\ Datasets\ &\ Unzip.ipynb
+│   └── 2.\ Creating\ AI-model\ using\ TensorFlow.ipynb
+├── Pipfile
+├── Pipfile.lock
+├── README.md
+├── SMS-SPAM
+│   ├── 1\ -\ Download\ Datasets.ipynb
+│   ├── 2\ -\ Download\ Datasets\ &\ Unzip.ipynb
+│   ├── 3\ -\ Extract,\ Review\ &\ Combine\ Datasets.ipynb
+│   ├── 4.\ Convert\ Datasets\ Into\ Vectors.ipynb
+│   ├── 5.\ Convert\ Datasets\ Into\ Vectors,\ Split\ &\ Export.ipynb
+│   └── 6.\ Creating\ Machine\ Learning\ Algorithm.ipynb
+├── app
+│   ├── AI_models.py
+│   ├── Images_address.py
+│   ├── TEST.py
+│   ├── __inti.py__
+│   └── main.py
+├── assets
+│   └── pngkey.com-particle-png-5104887.png
+├── dockerfile
+└── requirements.txt
+```
+
+```zsh
+pip3 install -r requriments.txt
+```
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
