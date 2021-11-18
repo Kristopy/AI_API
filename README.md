@@ -145,7 +145,7 @@ app = FastAPI()
 
 The expected output should be: 
 
-```js
+```py
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 INFO:     Started reloader process [5940] using statreload
 INFO:     Started server process [5942]
