@@ -61,7 +61,7 @@ async def read_index(q: Optional[str] = None):  # /?q=path to filename
         metadata_path=METADATA_NUM_REC_EXPORT_PATH,
         image_path=query
     )
-    
+    #hei malin
     results = AI_MODEL.AI_NUM_REC(query)
 
 
