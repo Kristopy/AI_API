@@ -122,18 +122,19 @@
    git clone https://github.com/kristopy/AI-API
    ```
 
+
 2. >Note: Create a virtuel envirement before installing dependencies - cd to working parent directory AI-API. 
 
-3. For creating a virtuel envirement run:  
+    For creating a virtuel envirement run:  
     ```
     $ pipenv shell
     ```
 
-4. The first thing to do is to install the required requirements, containing all the neccesary packages in this project. 
+3. The first thing to do is to install the required requirements, containing all the neccesary packages in this project. 
     ```zsh
     $ pip3 install -r requirements.txt
     ```
-5. >Run main.py using uvicorn.
+4. >Run main.py using uvicorn.
     
     From command line run the following command:
 
