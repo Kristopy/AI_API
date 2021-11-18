@@ -15,7 +15,7 @@ from fastapi import HTTPException
 @dataclass
 class AIModel:
 
-    # * Generally declearing __init__ variabled -> for use in all models implemented
+    # * Generally declearing __init__ variables -> for use in all models implemented
     model_path: Path
     tokenizer_path: Optional[Path] = None
     metadata_path: Optional[Path] = None
