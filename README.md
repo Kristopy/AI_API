@@ -55,32 +55,24 @@
 
 **This section contains informations about the project and how to take it to use.**
 
-> First agenda is wath the project contains. 
+> First agenda is what the project contains. 
 
+<!-- Working tree-->
 
+### Working tree
 ```
 ├── Datasets
 │   ├── Datasets_NUM_REC
 │   │   ├── Exports
 │   │   │   ├── Num_Rec_Metadata.json
 │   │   │   └── Num_Rec_Model.h5
-│   │   ├── Images_convert
-│   │   │   ├── Number_0.png
-│   │   │   ├── Number_2.png
-│   │   │   ├── Number_3.png
-│   │   │   ├── Number_3_2.png
-│   │   │   ├── Number_5.png
-│   │   │   ├── Number_7.png
-│   │   │   ├── Number_8.png
-│   │   │   ├── Number_8_2.png
-│   │   │   └── Number_9.png
 │   │   ├── NUM_REC_Classifier
 │   │   │   ├── Test_datasets
 │   │   │   │   ├── num-rec-test-image-dataset
 │   │   │   │   └── num-rec-test-labels-dataset
 │   │   │   └── Train_datasets
 │   │   │       ├── num-rec-train-image-dataset
-│   │   │       └── num-rec-train-labels-dataset
+│   │   │       └──num-rec-train-labels-dataset
 │   │   └── Zips
 │   │       ├── num-rec-test-image-dataset
 │   │       ├── num-rec-test-labels-dataset
@@ -95,23 +87,13 @@
 │       │   └── Spam_Model.h5
 │       ├── Spam-Classifier
 │       │   ├── Sms-Spam
-│       │   │   ├── SMSSpamCollection
-│       │   │   └── readme
 │       │   └── Youtube-Spam
-│       │       ├── Youtube01-Psy.csv
-│       │       ├── Youtube02-KatyPerry.csv
-│       │       ├── Youtube03-LMFAO.csv
-│       │       ├── Youtube04-Eminem.csv
-│       │       ├── Youtube05-Shakira.csv
-│       │       └── __MACOSX
 │       └── Zips
 │           ├── sms-spam-dataset.zip
 │           └── youtube-spam-dataset.zip
 ├── NUM_REC
 │   ├── 1.\ Download\ Datasets\ &\ Unzip.ipynb
 │   └── 2.\ Creating\ AI-model\ using\ TensorFlow.ipynb
-├── Pipfile
-├── Pipfile.lock
 ├── README.md
 ├── SMS-SPAM
 │   ├── 1\ -\ Download\ Datasets.ipynb
