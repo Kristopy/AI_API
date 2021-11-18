@@ -25,6 +25,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+[![twitter][twitter-shield]][twitter-url]
 
 
 
@@ -69,3 +70,5 @@
 [license-url]: https://github.com/kristopy/RaspberryPi_Real-Time-monitoring/blob/master/LICENSE.txt -->
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/kristofferwv
+[twitter-shield]: https://img.shields.io/badge/-twitter-black.svg?style=for-the-badge&logo=twitter&colorB=555
+[twitter-url]: https://twitter.com/KristofferWV
