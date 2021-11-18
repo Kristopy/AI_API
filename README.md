@@ -114,9 +114,47 @@
 └── requirements.txt
 ```
 
-```zsh
-pip3 install -r requriments.txt
+>Note: Create a virtuel envirement before installing dependencies - cd to working parent directory AI-API. 
+
+For creating a virtuel envirement run:  
 ```
+$ pipenv shell
+```
+
+
+The first thing to do is to install the required requirements, containing all the neccesary packages in this project. 
+
+```zsh
+$ pip3 install -r requirements.txt
+```
+
+>Second agenda is to run main.py using uvicorn.
+
+From command line run the following command: 
+
+```
+$ uvicorn app.main:app --reload
+```
+The ```--reload``` parameter reloads the app when changes to the filestructure is maid. 
+
+Remember that inside main.py we declear the app using. 
+
+```py
+app = FastAPI()
+```
+
+The expected output should be: 
+
+```js
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [5940] using statreload
+INFO:     Started server process [5942]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+```
+
+>The fastAPI is now ready for usage. 
+
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
