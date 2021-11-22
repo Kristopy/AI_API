@@ -6,7 +6,6 @@ jupyter
 tensorflow
 scikit-learn
 bodyParser
-matplotlib
 jupyterthemes
 opencv-python
 docker
