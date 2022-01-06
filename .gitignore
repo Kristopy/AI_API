@@ -12,6 +12,7 @@ __pycache__/
 Pipfile
 .ipynb_checkpoints/*
 Untitled.ipynb
+.idea
 # Distribution / packaging
 .Python
 build/
