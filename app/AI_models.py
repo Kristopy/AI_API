@@ -105,14 +105,7 @@ class AIModel:
 
     # * This section is based upon AI_NUM_REC MODEL.
     # * START
-    # def Convert_img_to_vec(self, query: str):
-    #     try: 
-    #         vec_image = Image_Convert()
-    #         return vec_image
-    #     except:
-    #         return Exception('File not read!')
-        
-        
+
 
     def AI_NUM_REC(self, path_to_img: str):
         model = self.get_model()
