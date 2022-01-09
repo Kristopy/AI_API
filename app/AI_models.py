@@ -4,17 +4,16 @@ import numpy as np
 from typing import Optional, List
 from pathlib import Path
 from dataclasses import dataclass  # pip install dataclasses
+import Images_address
 
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import tokenizer_from_json
-
-import Images_address
-
 from fastapi import HTTPException
+
+
 @dataclass
 class AIModel:
-
     # * Generally declearing __init__ variables -> for use in all models implemented
     model_path: Path
     tokenizer_path: Optional[Path] = None
