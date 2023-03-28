@@ -20,12 +20,8 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use. TEST
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-[![twitter][twitter-shield]][twitter-url]
+[![codecov](https://codecov.io/gh/Kristopy/AI_API/branch/master/graph/badge.svg?token=3GWUWSFP6O)](https://codecov.io/gh/Kristopy/AI_API)
+
 
 
 
