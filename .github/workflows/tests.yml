@@ -32,10 +32,21 @@ jobs:
         pipenv run coverage run --source=. -m pytest && pipenv run coverage xml
         pipenv run coverage report -m --omit="*/tests/*"
  
+    - name: Install dependencies
+      working-directory: app
+      run: |
+        pipenv install --dev
+
+    - name: Tests 2
+      working-directory: app
+      run: |
+        pipenv run coverage run --source=. -m pytest && pipenv run coverage xml
+        pipenv run coverage report -m --omit="*/tests/*"
+
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        files: ./coverage.xml
+        files: ./coverage.xml,app/coverage.xml
         fail_ci_if_error: true # optional (default = false)
         verbose: true # optional (default = false)
